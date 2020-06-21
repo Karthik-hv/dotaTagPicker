@@ -25,6 +25,7 @@ class DotAHeroData:
 
 
 
+
 #Open the active list and assign it to an object. The whitelist tag is from the json list.
 with open('/home/aditya/Documents/development/dotaTagPick_python/heroActivelist.json') as f:
   heroWhitelist = json.load(f)["whitelist"]
@@ -46,12 +47,12 @@ for key,value in heroWhitelist.items():
   # As every hero in the game has a different number of abilities,we create a temp dict that holds only the ability name information.
   # assign the current value of hero in consideration to a variable for easy access.
   currentHeroABilityKey = heroCompleteData[key]
-  
+
   loopHeroAbilityValuesDict = dict()
   loopAbilityStore = dict()
   loopAbilityData = dict()
   for heroKey, valueKey in currentHeroABilityKey.items():
-    if 'Ability' in heroKey and heroKey != 'AbilityDraftIgnoreCount' and heroKey!= 'AbilityPreview' and heroKey != 'AbilityLayout' and heroKey!= 'AbilityDraftAbilities' and heroKey!= 'AbilityDraftDisabled' and heroKey!='AbilityTalentStart' and heroKey != 'AbilityDraftUniqueAbilities': 
+    if 'Ability' in heroKey and heroKey != 'AbilityDraftIgnoreCount' and heroKey!= 'AbilityPreview' and heroKey != 'AbilityLayout' and heroKey!= 'AbilityDraftAbilities' and heroKey!= 'AbilityDraftDisabled' and heroKey!='AbilityTalentStart' and heroKey != 'AbilityDraftUniqueAbilities':
 
       loopAbilityData = heroAbilityData[valueKey]
       loopHeroAbilityValuesDict[valueKey] = loopAbilityData
@@ -61,10 +62,10 @@ for key,value in heroWhitelist.items():
   HeroName = currentHeroABilityKey['workshop_guide_name']
   PrimaryAttribute = currentHeroABilityKey['AttributePrimary']
   AttackRange = currentHeroABilityKey['AttackCapabilities']
-  
+
   heroContainer = DotAHeroData(HeroID,AttackRange,PrimaryAttribute,HeroName,**loopAbilityStore)
   masterHeroDataContainer[key] = heroContainer.__dict__
-  
+
 
 
 
@@ -76,5 +77,3 @@ with open('heroMasterTable.json', 'w') as fp:
 
 
 print("update script run!")
-
-
